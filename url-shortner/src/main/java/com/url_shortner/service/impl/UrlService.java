@@ -27,7 +27,7 @@ public class UrlService implements IUrlService {
     }
 
     @Override
-    public UrlMapping createShortUrl(String url) {
+    public String createShortUrl(String url) {
         UrlMapping urlMapping = new UrlMapping();
         urlMapping.setUrl(url);
 
@@ -39,7 +39,7 @@ public class UrlService implements IUrlService {
         urlMapping.setShortCode(code);
         urlRepository.save(urlMapping);
 
-        return urlMapping;
+        return code;
     }
 
     @Override

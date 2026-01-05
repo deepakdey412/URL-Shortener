@@ -16,9 +16,9 @@ public class UrlController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<UrlMapping> create(@RequestParam String url) {
-        UrlMapping shortUrl = urlService.createShortUrl(url);
-        return  new ResponseEntity<>(shortUrl, HttpStatus.CREATED);
+    public ResponseEntity<String> create(@RequestParam String url) {
+        String code  = urlService.createShortUrl(url);
+        return  new ResponseEntity<>("http://localhost:8080/u/" + code , HttpStatus.CREATED);
     }
 
     @PutMapping("/update/{shortCode}")
