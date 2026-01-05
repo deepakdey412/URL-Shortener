@@ -21,13 +21,13 @@ public class UrlController {
         return  new ResponseEntity<>(shortUrl, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{shortCode}")
+    @PutMapping("/update/{shortCode}")
     public ResponseEntity<UrlMapping> updateShortUrl(@PathVariable String shortCode , @RequestParam String url) {
         UrlMapping urlMapping = urlService.updateLongUrl(shortCode, url);
         return  new ResponseEntity<>(urlMapping, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{shortCode}")
+    @DeleteMapping("/delete/{shortCode}")
     public ResponseEntity<String > deleteShortUrl(@PathVariable String shortCode) {
         String msg = urlService.deleteShortUrl(shortCode);
         return  new ResponseEntity<>(msg, HttpStatus.OK);
