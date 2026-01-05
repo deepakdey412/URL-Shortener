@@ -21,9 +21,9 @@ public class UrlController {
     @PostMapping("/create")
     public ResponseEntity<String> create(@RequestParam String url , HttpServletResponse response) {
         String code  = urlService.createShortUrl(url);
-        return  new ResponseEntity<>("http://localhost:8080/u/" + code , HttpStatus.CREATED);
+        return  new ResponseEntity<>("http://localhost:8080/url-shortner/" + code , HttpStatus.CREATED);
     }
-    @GetMapping("/u/{shortCode}")
+    @GetMapping("/{shortCode}")
     public void redirect(@PathVariable String shortCode , HttpServletResponse response) throws IOException {
         String originalUrl = urlService.getOriginal(shortCode);
         response.sendRedirect(originalUrl);
