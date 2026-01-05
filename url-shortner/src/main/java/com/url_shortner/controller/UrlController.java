@@ -2,9 +2,12 @@ package com.url_shortner.controller;
 
 import com.url_shortner.entity.UrlMapping;
 import com.url_shortner.service.IUrlService;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/url-shortner")
@@ -16,9 +19,14 @@ public class UrlController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> create(@RequestParam String url) {
+    public ResponseEntity<String> create(@RequestParam String url , HttpServletResponse response) {
         String code  = urlService.createShortUrl(url);
         return  new ResponseEntity<>("http://localhost:8080/u/" + code , HttpStatus.CREATED);
+    }
+    @GetMapping("/u/{shortCode}")
+    public void redirect(@PathVariable String shortCode , HttpServletResponse response) throws IOException {
+        String originalUrl = urlService.getOriginal(shortCode);
+        response.sendRedirect(originalUrl);
     }
 
     @PutMapping("/update/{shortCode}")

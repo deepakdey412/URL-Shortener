@@ -62,4 +62,10 @@ public class UrlService implements IUrlService {
         return "Url Deleted Successfully";
     }
 
+    @Override
+    public String getOriginal(String shortCode) {
+        String originalUrl =  urlRepository.findByShortCode(shortCode).getUrl();
+        return originalUrl;
+    }
+
 }
